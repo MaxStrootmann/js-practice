@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="playersChoice">Rock-Paper-Scissors</label>
+    <select name="#" id="playersChoice">
+      <option value="rock">Rock</option>
+      <option value="paper">Paper</option>
+      <option value="scissors">Scissors</option>
+    </select>
+
+    <button onclick="runGame()">Go!</button>
+
+    <p class="computersPick"></p>
+    <p class="result"></p>
+    <p class="playersScore"></p>
+    <p class="computersScore"></p>
+    <h1 class="gameOver"></h1>
+
+    <script>
+      function getComputersChoice() {
+        const randomNumber = Math.floor(Math.random() * 3) + 1;
+        switch (randomNumber) {
+          case 1:
+            return "rock";
+            break;
+          case 2:
+            return "paper";
+            break;
+          case 3:
+            return "scissors";
+            break;
+          default:
+            throw error("randomNumber was not 1,2 or 3");
+        }
+      }
+
+      let playersChoice = document.querySelector("#playersChoice").value;
+      let playersScore = document.querySelector(".playersScore");
+      let computersScore = document.querySelector(".computersScore");
+      let playCount = 0;
+      let playersScoreCount = 0;
+      let computersScoreCount = 0;
+
+      function runGame() {
+        const computer = getComputersChoice();
+        const getResult = () => {
+          if (computer === "rock") {
+            switch (playersChoice) {
+              case "rock":
+                return "It's a tie.";
+                break;
+              case "paper":
+                {
+                  playersScoreCount++;
+                  return "You win!";
+                }
+                break;
+              case "scissors":
+                {
+                  computersScoreCount++;
+                  return "You lost.";
+                }
+                break;
+            }
+          } else if (computer === "paper") {
+            switch (playersChoice) {
+              case "rock":
+                {
+                  computersScoreCount++;
+                  return "You lost.";
+                }
+                break;
+              case "paper":
+                return "It's a tie.";
+                break;
+              case "scissors":
+                {
+                  playersScoreCount++;
+                  return "You win!";
+                }
+                break;
+            }
+          } else if (computer === "scissors") {
+            switch (playersChoice) {
+              case "rock":
+                {
+                  playersScoreCount++;
+                  return "You win!";
+                }
+                break;
+              case "paper":
+                {
+                  computersScoreCount++;
+                  ("You lost.");
+                }
+                break;
+              case "scissors":
+                return "It's a tie.";
+                break;
+            }
+          }
+        };
+
+        const result = getResult();
+        playCount++;
+
+        document.querySelector(".computersPick").innerHTML = `Computers pick: ${computer}`;
+        document.querySelector(".result").innerHTML = result;
+        playersScore.innerHTML = `Player score: ${playersScoreCount}`;
+        computersScore.innerHTML = `Computer score: ${computersScoreCount}`;
+
+        if (playersScoreCount === 3) {
+          document.querySelector(".gameOver").innerHTML = "Game over: YOU WIN!";
+        } else if (computersScoreCount === 3) {
+          document.querySelector(".gameOver").innerHTML = "Game over: YOU LOSE.";
+        } else if (playersScoreCount === 2 && computersScoreCount === 1) {
+          document.querySelector(".gameOver").innerHTML = "Game over: YOU WIN!";
+        } else if (playersScoreCount === 1 && computersScoreCount === 2) {
+          document.querySelector(".gameOver").innerHTML = "Game over: YOU LOSE.";
+        }
+      }
+    </script>
+  </body>
+</html>

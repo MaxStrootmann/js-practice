@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="show"></div>
+    <script>
+      let login = prompt("enter login: ");
+
+      if (login == "TheMaster") {
+        alert("Welcome");
+        let password = prompt("enter password: ");
+        if (password == "TheMaster") {
+          alert("Welcome");
+        } else if (password == "" || password == null) {
+          alert("cancelled");
+        } else {
+          alert("wrong password");
+        }
+      } else if (login == "" || login == null) {
+        alert("cancelled");
+      } else {
+        alert("i dont know u");
+      }
+    </script>
+  </body>
+</html>
